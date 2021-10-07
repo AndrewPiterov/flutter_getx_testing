@@ -57,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  fluent_result:
+    dependency: transitive
+    description:
+      name: fluent_result
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -74,6 +81,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  get:
+    dependency: "direct main"
+    description:
+      name: get
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.3.8"
   lints:
     dependency: transitive
     description:
@@ -102,6 +116,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  rxdart:
+    dependency: "direct main"
+    description:
+      name: rxdart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.27.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -114,6 +135,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.1"
+  speed_up:
+    dependency: "direct main"
+    description:
+      name: speed_up
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
+  speed_up_flutter:
+    dependency: "direct main"
+    description:
+      name: speed_up_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.3"
+  speed_up_get:
+    dependency: "direct main"
+    description:
+      name: speed_up_get
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   stack_trace:
     dependency: transitive
     description:
@@ -165,3 +207,4 @@ packages:
     version: "2.1.0"
 sdks:
   dart: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"

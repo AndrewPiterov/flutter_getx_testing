@@ -1,16 +1,14 @@
 # flutter_getx_testing
 
-A new Flutter project.
+A new Flutter project which covered with tests.
 
-## Getting Started
+## Unit Testing
 
-This project is a starting point for a Flutter application.
+### Tolerance
 
-A few resources to get you started if this is your first Flutter project:
+- DateTimes
+- Float
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Streams
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- BehaviorSubject distinct
