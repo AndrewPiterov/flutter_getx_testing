@@ -4,30 +4,17 @@ import 'dart:math';
 
 final _random = Random();
 
-extension DoubleIterableExtension on Iterable<double> {
-  double sum() =>
-      fold<double>(0, (previousValue, element) => previousValue + element);
-}
-
-extension IntIterableExtension on Iterable<int> {
-  int sum() =>
-      fold<int>(0, (previousValue, element) => previousValue + element);
-}
-
-extension IntExtension on int {
-  Iterable<T> generate<T>(T Function(int index) func) sync* {
-    for (var i = 0; i < this; i++) {
-      yield func(i);
-    }
-  }
-}
-
-Order randomOrder([int? index]) {
+Order randomOrder({
+  int? id,
+  double? amount,
+  double? price,
+}) {
+  final coinAmount = amount ?? _random.nextDouble() + 1;
+  final coinnPrice = price ?? _random.nextDouble() + 1;
   return Order(
-    id: (index == null ? _random.nextInt(1000) : index + 1).toString(),
-    coinAmount: _random.nextDouble(),
-    coinPrice: _random.nextDouble(),
-    totalPaid: _random.nextDouble(),
+    id: (id ?? DateTime.now().microsecondsSinceEpoch).toString(),
+    coinAmount: coinAmount,
+    coinPrice: coinnPrice,
     date: DateTime.now().add(Duration(days: -_random.nextInt(100))),
   );
 }

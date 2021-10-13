@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import 'order_history/order_history_page.dart';
+import 'order_list/order_list_page.dart';
 import 'settings/settings_page.dart';
 import 'wallet/wallet_page.dart';
 
@@ -15,7 +14,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   final List<Widget> _tabPages = [
     const WalletPage(),
-    const OrderHistoryPage(),
+    const OrderListPage(),
     const SettingsPage(),
   ];
 

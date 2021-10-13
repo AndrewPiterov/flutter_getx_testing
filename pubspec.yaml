@@ -11,17 +11,30 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.3
-  speed_up: ^0.4.0
-  speed_up_flutter: ^0.4.3
+
+  equatable: ^2.0.3
+  fluent_result: ^4.0.1
+  speed_up: ^0.4.2
   speed_up_get: ^0.0.1
   get: ^4.3.8
   rxdart: ^0.27.2
-  
+
+  # UI
+  cupertino_icons: ^1.0.3
+  fluttertoast: ^8.0.8
+  speed_up_flutter: ^0.4.3
+
+  # Firebase
+  firebase_core: ^1.7.0
+  cloud_firestore: ^2.5.3
+
 dev_dependencies:
+  build_runner: ^2.1.4  
   flutter_test:
     sdk: flutter  
   flutter_lints: ^1.0.4
+  shouldly: ^0.2.4
+  mocktail: ^0.2.0
 
 flutter:
   uses-material-design: true

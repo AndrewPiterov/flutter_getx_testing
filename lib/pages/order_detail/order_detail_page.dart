@@ -39,7 +39,7 @@ class OrderDetailPage extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
             ),
             Text(
-              'Date: ${order.date.toIso8601String()}',
+              'Date: ${order.date?.toIso8601String() ?? ""}',
               style: Theme.of(context).textTheme.headline6,
             ),
           ],

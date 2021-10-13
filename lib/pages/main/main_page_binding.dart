@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import 'order_history/order_history_page_controller.dart';
+import 'order_list/order_list_page_controller.dart';
 import 'settings/settings_page_controller.dart';
 import 'wallet/widgets/portfolio_summary_view_controller.dart';
 
@@ -9,8 +9,12 @@ class MainPageBinding implements Bindings {
   void dependencies() {
     Get.lazyPut<IPortfolioSummaryViewController>(
         () => PortfolioSummaryViewController());
-    Get.lazyPut<IOrderHistoryPageController>(
-        () => OrderHistoryPageController());
+    Get.lazyPut(() => OrderListPageController(
+          Get.find(),
+          Get.find(),
+          Get.find(),
+          Get.find(),
+        ));
     Get.lazyPut<ISettingsPageController>(() => SettingsPageController());
   }
 }

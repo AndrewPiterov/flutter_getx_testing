@@ -10,6 +10,9 @@ class PnlData {
   final double value;
   final double percent;
   final double holdingValue;
+
+  @override
+  String toString() => 'PNL: \$$value ($percent%)';
 }
 
 class PnlCalculator {
@@ -17,10 +20,15 @@ class PnlCalculator {
     required Wallet wallet,
     required double currentPrice,
   }) {
+    final holding = wallet.coinAmount * currentPrice;
+    final value = holding - wallet.totalInvested;
+    final percent =
+        wallet.isEmpty ? 0.0 : (holding / wallet.totalInvested) * 100;
+
     return PnlData(
-      value: 0,
-      percent: 0,
-      holdingValue: 0,
+      value: value,
+      percent: value < 0 ? -percent : percent,
+      holdingValue: holding,
     );
   }
 }

@@ -5,7 +5,7 @@ abstract class ICoinMarketService {
   Stream<double> get currentCoinPrice$;
 }
 
-class CoinMarketService extends GetxService implements ICoinMarketService {
+class DummyCoinMarketService extends GetxService implements ICoinMarketService {
   @override
   Stream<double> get currentCoinPrice$ => const Stream.empty();
 }

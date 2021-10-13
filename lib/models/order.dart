@@ -1,15 +1,33 @@
-class Order {
+import 'package:equatable/equatable.dart';
+
+class Order extends Equatable {
   const Order({
-    required this.id,
+    this.id,
     required this.coinAmount,
     required this.coinPrice,
-    required this.totalPaid,
-    required this.date,
+    this.date,
   });
 
-  final String id;
+  final String? id;
   final double coinAmount;
   final double coinPrice;
-  final double totalPaid;
-  final DateTime date;
+  double get totalPaid => coinAmount * coinPrice;
+  final DateTime? date;
+
+  Order copyWith({String? id}) {
+    return Order(
+      id: id ?? this.id,
+      coinAmount: coinAmount,
+      coinPrice: coinPrice,
+      date: date,
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+        id,
+        coinAmount,
+        coinPrice,
+        date,
+      ];
 }
