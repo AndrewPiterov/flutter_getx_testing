@@ -62,8 +62,19 @@ void given(
   dynamic Function()? after,
   bool skip = false,
 }) {
+  final regExp = RegExp(r'^\[\w+]');
+  final w = regExp.stringMatch(description);
+
+  var desc = description;
+  var beggining = 'Given ';
+
+  if (w != null && w != '') {
+    desc = description.replaceAll(w, '');
+    beggining = w.replaceAll('[', '').replaceAll(']', '');
+  }
+
   group(
-    'Given $description',
+    '$beggining$desc',
     () {
       setUp(() => before?.call());
       tearDown(() => after?.call());
@@ -134,8 +145,19 @@ void when(
   dynamic Function()? after,
   bool skip = false,
 }) {
+  final regExp = RegExp(r'^\[\w+]');
+  final w = regExp.stringMatch(description);
+
+  var desc = description;
+  var beggining = 'When ';
+
+  if (w != null && w != '') {
+    desc = description.replaceAll(w, '');
+    beggining = w.replaceAll('[', '').replaceAll(']', '');
+  }
+
   group(
-    'When $description',
+    '$beggining$desc',
     () {
       setUp(() => before?.call());
       tearDown(() => after?.call());
