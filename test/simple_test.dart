@@ -9,7 +9,7 @@ void main() {
       after: () => calc.clear(),
       body: () {
         //
-        when('add 10',
+        whenn('add 10',
             before: () => calc.add(10),
             body: () {
               //
@@ -17,7 +17,7 @@ void main() {
                 calc.res.should.be(10);
               });
 
-              when('substract 5',
+              whenn('substract 5',
                   before: () => calc.substract(5),
                   body: () {
                     then('should be 5', () {
@@ -26,7 +26,7 @@ void main() {
                   });
             });
 
-        when('substruct 1',
+        whenn('substruct 1',
             before: () => calc.substract(1),
             body: () {
               //

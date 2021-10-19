@@ -8,7 +8,7 @@ class MainPageBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<IPortfolioSummaryViewController>(
-        () => PortfolioSummaryViewController());
+        () => PortfolioSummaryViewController(Get.find(), Get.find()));
     Get.lazyPut(() => OrderListPageController(
           Get.find(),
           Get.find(),

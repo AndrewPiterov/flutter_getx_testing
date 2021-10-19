@@ -25,7 +25,7 @@ class PortfolioSummaryView extends GetView<IPortfolioSummaryViewController> {
               Expanded(
                 child: _value(
                   title: 'Market Value',
-                  value: '\$${c.marketvalue}',
+                  value: '\$${c.marketValue}',
                 ),
               ),
               Container(

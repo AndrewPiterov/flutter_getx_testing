@@ -11,10 +11,10 @@ import 'package:rxdart/subjects.dart';
 import 'package:shouldly/shouldly.dart';
 
 import '../mocks.dart';
-import '../given_when_then.dart' as g;
+import '../given_when_then.dart';
 
 void main() {
-  g.given('OrderListController', body: () {
+  given('OrderListController', body: () {
     late IOrdersRepository mockRepo;
     late IDateTimeAdapter mockDateTimeAdapter;
     late INavigationService mockNavigator;
@@ -33,7 +33,7 @@ void main() {
       Get.reset();
     });
 
-    g.given('[with] order list', body: () {
+    given('[with] order list', body: () {
       const orders = [
         Order(id: '1', coinAmount: 100, coinPrice: 100),
         Order(id: '2', coinAmount: 100, coinPrice: 100),
@@ -55,19 +55,19 @@ void main() {
         controller.onInit();
       });
 
-      g.then('order list should be initializd', () {
+      then('order list should be initializd', () {
         // expect(controller.orders, orders);
         controller.orders.should.be(orders);
       });
 
-      g.when('pagination', body: () {
+      whenn('pagination', body: () {
         setUp(() async {
           // Act
           await controller.loadMoreOrders();
           await Future.delayed(const Duration(milliseconds: 1));
         });
 
-        g.then('new orders are loaded', () {
+        then('new orders are loaded', () {
           // Assert
           // expect(controller.orders.length, greaterThan(orders.length));
           controller.orders.length.should.beGreaterThan(orders.length);
@@ -75,7 +75,7 @@ void main() {
       });
     });
 
-    g.when('creating new order', body: () {
+    whenn('creating new order', body: () {
       const amount = 1000.0;
       const price = 7.0;
       final date = DateTime.now();
@@ -91,7 +91,7 @@ void main() {
         );
       });
 
-      g.when('[with] succsess creating', body: () {
+      whenn('[with] succsess creating', body: () {
         // Arrange
         const newOrderId = '123';
         const newOrderDetailPageArgs = newOrderId; // {'id': newOrderId};
@@ -114,7 +114,7 @@ void main() {
           await controller.save(amount, price);
         });
 
-        g.then('repo saving was called', () async {
+        then('repo saving was called', () async {
           // Assert
           verify(() => mockRepo.save(Order(
                 coinAmount: amount,
@@ -123,7 +123,7 @@ void main() {
               ))).called(1);
         });
 
-        g.then('navigate to detail page', () async {
+        then('navigate to detail page', () async {
           // Assert
 
           verify(() => mockNavigator.goTo(
@@ -132,13 +132,13 @@ void main() {
               )).called(1);
         });
 
-        g.then('show success message', () async {
+        then('show success message', () async {
           // Assert
           verify(() => mockToastrService.success('Success')).called(1);
         });
       });
 
-      g.when('[and] creation is failed', body: () {
+      whenn('[and] creation is failed', body: () {
         const errorMessage = 'could not create order';
         setUp(() async {
           // Arrange
@@ -154,7 +154,7 @@ void main() {
           await controller.save(amount, price);
         });
 
-        g.then('repo save was called', () {
+        then('repo save was called', () {
           verify(() => mockRepo.save(Order(
                 coinAmount: amount,
                 coinPrice: price,
@@ -162,11 +162,11 @@ void main() {
               ))).called(1);
         });
 
-        g.then('show error message', () {
+        then('show error message', () {
           verify(() => mockToastrService.error(errorMessage)).called(1);
         });
 
-        g.then('navigation to detail page was not called', () {
+        then('navigation to detail page was not called', () {
           verifyNever(() => mockNavigator.goTo(
                 AppRoutes.orderDetail,
                 args: any<String>(named: 'args'),
@@ -209,4 +209,8 @@ class DummyOrdersRepository extends GetxService implements IOrdersRepository {
     // TODO: implement save
     throw UnimplementedError();
   }
+
+  @override
+  // TODO: implement stat$
+  Stream<OrdersStat> get stat$ => throw UnimplementedError();
 }

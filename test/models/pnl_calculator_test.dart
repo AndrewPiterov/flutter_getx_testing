@@ -24,15 +24,46 @@ void main() {
     expect(pnl.percent, 0);
   });
 
+  group('Non empty wallet without pnl changes', () {
+    //
+    // Assert
+    const price = 31200.0;
+    const wallet = Wallet(orders: [
+      Order(
+        coinAmount: 1.0,
+        coinPrice: price,
+      ),
+    ]);
+    const currentPrice = price;
+
+    // Act
+    final pnl = PnlCalculator.calculate(
+      wallet: wallet,
+      currentPrice: currentPrice,
+    );
+
+    test('holding value the same', () {
+      pnl.holdingValue.should.be(price);
+    });
+
+    test('Pnl Value should be zero', () {
+      pnl.value.should.beZero();
+    });
+
+    test('Pnl % should be 0', () {
+      pnl.percent.should.beZero();
+    });
+  });
+
   group('Non empty wallet with Profit', () {
     // Assert
     const wallet = Wallet(orders: [
       Order(
-        coinAmount: 1,
-        coinPrice: 20000,
+        coinAmount: 1.0,
+        coinPrice: 31200.0,
       ),
     ]);
-    const currentPrice = 100000.0;
+    const currentPrice = 62400.0;
 
     // Act
     final pnl = PnlCalculator.calculate(
@@ -42,17 +73,17 @@ void main() {
 
     test('should have holding value', () {
       // Assert
-      pnl.holdingValue.should.as('Holding Value').beGreaterThan(0);
+      pnl.holdingValue.should.as('Holding Value').be(62400.0);
     });
 
     test('should have PNL Value', () {
       // Assert
-      pnl.value.should.as('PNL Value').beAbove(0);
+      pnl.value.should.as('PNL Value').be(31200.0);
     });
 
     test('should have PNL Percent', () {
       // Assert
-      pnl.percent.should.beGreaterThan(0);
+      pnl.percent.should.be(100.0);
     });
   });
 
@@ -60,13 +91,13 @@ void main() {
     // Assert
     const wallet = Wallet(orders: [
       Order(
-        coinAmount: 1,
-        coinPrice: 100000,
+        coinAmount: 1.0,
+        coinPrice: 62400.0,
       ),
     ]);
-    const currentPrice = 50000.0;
+    const currentPrice = 31200.0;
 
-    when('calculate', body: () {
+    whenn('calculate', body: () {
       // Act
       final pnl = PnlCalculator.calculate(
         wallet: wallet,
@@ -76,17 +107,17 @@ void main() {
 
       then('holding value should be less', () {
         // Assert
-        pnl.holdingValue.should.as('Holding Value').be(50000);
+        pnl.holdingValue.should.as('Holding Value').be(31200.0);
       });
 
       then('PNL value should be negative', () {
         // Assert
-        pnl.value.should.be(-50000);
+        pnl.value.should.be(-31200.0);
       });
 
       then('PNL Percent should be negative', () {
         // Assert
-        pnl.percent.should.be(-50);
+        pnl.percent.should.be(-50.0);
       });
     });
   });

@@ -138,7 +138,7 @@ void given(
 /// avoid this flag if possible, and instead use the test runner flag `-n` to
 /// filter tests by name.
 @isTestGroup
-void when(
+void whenn(
   String description, {
   required dynamic Function() body,
   dynamic Function()? before,

@@ -8,10 +8,22 @@ import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:speed_up_get/speed_up_get.dart';
 
+class OrdersStat implements IInvestmentData {
+  OrdersStat(this.coinAmount, this.totalInvested);
+
+  @override
+  final double coinAmount;
+
+  @override
+  final double totalInvested;
+}
+
 /// For fetching orders of coin
 /// and saving new order
 abstract class IOrdersRepository {
   Stream<List<Order>> get orders$;
+
+  Stream<OrdersStat> get stat$;
 
   Future loadMoreOrders();
 
@@ -49,6 +61,7 @@ class FirebaseOrdersRepository extends GetxService
     unawaited(loadMoreOrders());
   }
 
+  @override
   Future loadMoreOrders() async {
     try {
       var q = _firestore
@@ -73,8 +86,22 @@ class FirebaseOrdersRepository extends GetxService
     }
   }
 
+  @override
   Future<ResultOf<Order>> save(Order order) async {
     // TODO: save in Firebase
     return ResultOf.success(order);
   }
+
+  @override
+  Stream<OrdersStat> get stat$ =>
+      _firestore.collection('stats').doc('1').snapshots().map((event) {
+        final data = event.data();
+        if (data == null) {
+          return OrdersStat(0, 0);
+        }
+        return OrdersStat(
+          double.parse(data['coinAmount']?.toString() ?? '0'),
+          double.parse(data['totalInvested']?.toString() ?? '0'),
+        );
+      });
 }

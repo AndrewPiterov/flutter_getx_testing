@@ -17,13 +17,23 @@ class PnlData {
 
 class PnlCalculator {
   static PnlData calculate({
-    required Wallet wallet,
+    required IInvestmentData wallet,
     required double currentPrice,
   }) {
     final holding = wallet.coinAmount * currentPrice;
     final value = holding - wallet.totalInvested;
-    final percent =
-        wallet.isEmpty ? 0.0 : (holding / wallet.totalInvested) * 100;
+
+    var percent = 0.0;
+
+    if (value != 0) {
+      if (wallet.totalInvested > 0) {
+        if (value > 0) {
+          percent = ((holding / wallet.totalInvested) - 1) * 100;
+        } else {
+          percent = ((holding / wallet.totalInvested)) * 100;
+        }
+      }
+    }
 
     return PnlData(
       value: value,
