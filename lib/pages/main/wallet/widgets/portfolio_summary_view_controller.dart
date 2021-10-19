@@ -35,15 +35,18 @@ class PortfolioSummaryViewController extends GetxController
   void onInit() {
     super.onInit();
     subscribe(
-        CombineLatestStream.combine2<double, List<Order>, PnlData>(
-            _coinMarketService.currentCoinPrice$,
-            _ordersRepository.orders$,
-            (a, b) => PnlCalculator.calculate(
-                wallet: Wallet(orders: b), currentPrice: a)), (PnlData value) {
-      _holdings.value = value.holdingValue;
-      _pnlValue.value = value.value;
-      _pnl.value = value.percent;
-    });
+        CombineLatestStream.combine2<double, IInvestmentData, void>(
+            _coinMarketService.currentCoinPrice$, _ordersRepository.stat$,
+            (a, b) {
+          final pnl = PnlCalculator.calculate(wallet: b, currentPrice: a);
+
+          _holdings.value = b.coinAmount;
+          _pnlValue.value = pnl.value;
+          _pnl.value = pnl.percent;
+          _cost.value = a;
+          _marketvalue.value = pnl.holdingValue;
+        }),
+        (_) => _);
   }
 
   final _cost = 0.0.obs;

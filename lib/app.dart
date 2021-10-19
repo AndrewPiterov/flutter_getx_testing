@@ -20,7 +20,6 @@ class App extends StatelessWidget {
             fontSize: 16.0,
           ),
         ),
-        // fontFamily:
       ),
       // routing
       initialRoute: AppRoutes.main,

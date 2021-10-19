@@ -1,3 +1,4 @@
+import 'package:flutter_getx_testing/shared/routing.dart';
 import 'package:get/get.dart';
 
 abstract class ISettingsPageController {
@@ -30,5 +31,6 @@ class SettingsPageController extends GetxController
   @override
   void signOut() {
     // TODO: sign out
+    Get.offAllNamed(AppRoutes.login);
   }
 }

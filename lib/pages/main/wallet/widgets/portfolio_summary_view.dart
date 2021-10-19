@@ -11,72 +11,69 @@ class PortfolioSummaryView extends GetView<IPortfolioSummaryViewController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.grey,
-          width: 2,
-        ),
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: _value(
-                  title: 'Market Value',
-                  value: '\$${c.marketValue}',
-                ),
-              ),
-              Container(
-                width: 2,
-                height: 70,
-                color: Colors.grey,
-              ),
-              Expanded(
-                child: _value(
-                  title: 'Holdings',
-                  value: '${c.holdings} BTC',
-                ),
-              ),
-            ],
-          ),
-          Container(
-            // width: 2,
-            height: 2,
+    return Obx(() {
+      return Container(
+        decoration: BoxDecoration(
+          border: Border.all(
             color: Colors.grey,
-            child: const Center(),
+            width: 2,
           ),
-          Row(
-            children: [
-              Expanded(
-                child: _value(
-                  title: 'Profit/Loss',
-                  value: '+ \$${c.pnlValue}',
-                  additional: Text(
-                    '+ ${c.pnl}%',
-                    style: const TextStyle(color: Colors.green),
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: _value(
+                    title: 'Market Value',
+                    value: '\$${c.marketValue.toStringAsFixed(2)}',
                   ),
                 ),
-              ),
-              Container(
-                width: 2,
-                height: 70,
-                color: Colors.grey,
-              ),
-              Expanded(
-                child: _value(title: 'Cost', value: '\$${c.cost}'),
-              ),
-            ],
-          ),
-          20.h,
-          OutlinedButton(
-            onPressed: controller.refreshData,
-            child: const Icon(Icons.refresh),
-          ),
-        ],
-      ),
-    );
+                Container(
+                  width: 2,
+                  height: 70,
+                  color: Colors.grey,
+                ),
+                Expanded(
+                  child: _value(
+                    title: 'Holdings',
+                    value: '${c.holdings.toStringAsFixed(2)} BTC',
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              // width: 2,
+              height: 2,
+              color: Colors.grey,
+              child: const Center(),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: _value(
+                    title: 'Profit/Loss',
+                    value: '+ \$${c.pnlValue.toStringAsFixed(2)}',
+                    additional: Text(
+                      '+ ${c.pnl.toStringAsFixed(2)}%',
+                      style: const TextStyle(color: Colors.green),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 2,
+                  height: 70,
+                  color: Colors.grey,
+                ),
+                Expanded(
+                  child: _value(title: 'Cost', value: '\$${c.cost}'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   Widget _value({

@@ -18,9 +18,11 @@ dependencies:
   speed_up_get: ^0.0.1
   get: ^4.3.8
   rxdart: ^0.27.2
+  web_socket_channel: ^2.1.0
 
   # UI
   cupertino_icons: ^1.0.3
+  intl: ^0.17.0
   fluttertoast: ^8.0.8
   speed_up_flutter: ^0.4.3
 
@@ -38,3 +40,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/
+    - assets/img/

@@ -20,25 +20,26 @@ class PnlCalculator {
     required IInvestmentData wallet,
     required double currentPrice,
   }) {
-    final holding = wallet.coinAmount * currentPrice;
-    final value = holding - wallet.totalInvested;
+    final holdingValue = wallet.coinAmount * currentPrice;
+
+    final value = holdingValue - wallet.totalInvested;
 
     var percent = 0.0;
 
     if (value != 0) {
       if (wallet.totalInvested > 0) {
         if (value > 0) {
-          percent = ((holding / wallet.totalInvested) - 1) * 100;
+          percent = ((holdingValue / wallet.totalInvested) - 1) * 100;
         } else {
-          percent = ((holding / wallet.totalInvested)) * 100;
+          percent = ((holdingValue / wallet.totalInvested)) * 100;
         }
       }
     }
 
     return PnlData(
       value: value,
-      percent: value < 0 ? -percent : percent,
-      holdingValue: holding,
+      percent: (value < 0 ? -percent : percent),
+      holdingValue: holdingValue,
     );
   }
 }

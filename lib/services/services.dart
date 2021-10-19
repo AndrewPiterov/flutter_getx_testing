@@ -19,6 +19,6 @@ Future initServices() async {
   Get.put<IDateTimeAdapter>(UtcDateTimeAdapter());
   Get.put<IToastrService>(ToastrService());
   Get.put<INavigationService>(GetXNavigationService());
-  Get.put(FirebaseOrdersRepository());
-  Get.put<ICoinMarketService>(DummyCoinMarketService());
+  Get.put<IOrdersRepository>(FirebaseOrdersRepository());
+  Get.put<ICoinMarketService>(BinanceCoinMarketService());
 }

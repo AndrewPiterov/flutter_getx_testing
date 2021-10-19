@@ -59,7 +59,12 @@ class SettingsPage extends GetView<ISettingsPageController> {
             20.h,
             OutlinedButton(
               onPressed: c.signOut,
-              child: const Text('Signout'),
+              child: const Text(
+                'Sign Out',
+                style: TextStyle(
+                  color: Colors.redAccent,
+                ),
+              ),
             ),
           ],
         ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_testing/shared/routing.dart';
+import 'package:get/get.dart';
 import 'package:speed_up_flutter/speed_up_flutter.dart';
 
 class LoginPage extends StatelessWidget {
@@ -9,62 +11,74 @@ class LoginPage extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Login to Wallet',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 42,
+        body: Padding(
+          padding: const EdgeInsets.all(40.0),
+          child: Column(
+            children: [
+              (Get.height / 7).h,
+              Padding(
+                padding: const EdgeInsets.all(40.0),
+                child: Image.asset('assets/img/btc.png'),
               ),
-            ),
-            40.h,
-            TextField(
-              key: const ValueKey('usernameInput'),
-              decoration: const InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.blue,
-                    width: 1.0,
-                  ),
+              const Text(
+                'Login to Wallet',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 42,
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey,
-                    width: 1.0,
-                  ),
-                ),
-                hintText: 'Username',
               ),
-              onChanged: (username) {},
-            ),
-            10.h,
-            TextField(
-              key: const ValueKey('passwordInput'),
-              decoration: const InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.blue,
-                    width: 1.0,
+              40.h,
+              TextField(
+                key: const ValueKey('usernameInput'),
+                decoration: const InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.blue,
+                      width: 1.0,
+                    ),
                   ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey,
-                    width: 1.0,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey,
+                      width: 1.0,
+                    ),
                   ),
+                  hintText: 'Username',
                 ),
-                hintText: 'Password',
+                onChanged: (username) {},
               ),
-              onChanged: (password) {},
-            ),
-            10.h,
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Login'),
-            ),
-          ],
+              10.h,
+              TextField(
+                key: const ValueKey('passwordInput'),
+                decoration: const InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.blue,
+                      width: 1.0,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey,
+                      width: 1.0,
+                    ),
+                  ),
+                  hintText: 'Password',
+                ),
+                onChanged: (password) {},
+              ),
+              10.h,
+              ElevatedButton(
+                onPressed: () => Get.offAllNamed(AppRoutes.main),
+                child: SizedBox(
+                  height: 40,
+                  child: Center(
+                    child: const Text('Login'),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -21,6 +21,7 @@ class AppRouting {
     GetPage(
       name: AppRoutes.orderDetail,
       page: () => const OrderDetailPage(),
+      binding: OrderDetailBindings(),
     ),
   ];
 }
