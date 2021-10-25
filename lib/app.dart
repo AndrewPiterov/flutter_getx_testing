@@ -2,28 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_getx_testing/shared/routing.dart';
 import 'package:get/get.dart';
 
+import 'services/services.dart';
+import 'shared/shared.dart';
+
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter GetX Testing',
-      debugShowCheckedModeBanner: false,
-      // theme
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        colorScheme: const ColorScheme.light(),
-        textTheme: const TextTheme(
-          headline6: TextStyle(fontSize: 25.0, fontStyle: FontStyle.normal),
-          bodyText2: TextStyle(
-            fontSize: 16.0,
-          ),
-        ),
-      ),
-      // routing
-      initialRoute: AppRoutes.main,
-      getPages: AppRouting.pages,
-    );
+    return Obx(() => GetMaterialApp(
+          title: 'Flutter GetX Testing',
+          debugShowCheckedModeBanner: false,
+          // Theme
+          themeMode: Get.find<IThemeService>().currentTheme,
+          theme: MyThemes.light,
+          darkTheme: MyThemes.dark,
+
+          // Localization
+          // translations: AppTranslations(),
+          // locale: Get.deviceLocale,
+          // fallbackLocale: const Locale('en', 'US'),
+
+          // routing
+          initialRoute: AppRoutes.main,
+          getPages: AppRouting.pages,
+        ));
   }
 }

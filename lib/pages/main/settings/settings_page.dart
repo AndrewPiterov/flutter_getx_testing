@@ -23,21 +23,23 @@ class SettingsPage extends GetView<ISettingsPageController> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  c.isDarkMode ? 'DARK' : 'Light',
-                  style: c.isDarkMode
-                      ? const TextStyle(fontWeight: FontWeight.bold)
-                      : null,
-                ),
-                Switch.adaptive(
-                  // key: ValueKey('dark_theme_switch'),
-                  value: c.isDarkMode,
-                  onChanged: c.toggleDarkTheme,
-                ),
-              ],
+            Obx(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    c.isDarkMode ? 'DARK' : 'Light',
+                    style: c.isDarkMode
+                        ? const TextStyle(fontWeight: FontWeight.bold)
+                        : null,
+                  ),
+                  Switch.adaptive(
+                    // key: ValueKey('dark_theme_switch'),
+                    value: c.isDarkMode,
+                    onChanged: c.toggleDarkTheme,
+                  ),
+                ],
+              ),
             ),
             20.h,
             Row(
