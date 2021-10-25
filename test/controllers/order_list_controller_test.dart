@@ -6,15 +6,16 @@ import 'package:flutter_getx_testing/services/services.dart';
 import 'package:flutter_getx_testing/shared/routing.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
+import 'package:given_when_then_unit_test/given_when_then_unit_test.dart'
+    hide when;
 import 'package:mocktail/mocktail.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:shouldly/shouldly.dart';
 
 import '../mocks.dart';
-import '../given_when_then.dart';
 
 void main() {
-  given('OrderListController', body: () {
+  given('OrderListController', () {
     late IOrdersRepository mockRepo;
     late IDateTimeAdapter mockDateTimeAdapter;
     late INavigationService mockNavigator;
@@ -22,25 +23,25 @@ void main() {
 
     late OrderListPageController controller;
 
-    setUp(() {
+    before(() {
       mockRepo = MockOrderRepository();
       mockDateTimeAdapter = MockDateTimeAdapter();
       mockNavigator = MockNavigator();
       mockToastrService = MockToastrService();
     });
 
-    tearDown(() {
+    after(() {
       Get.reset();
     });
 
-    given('[with] order list', body: () {
+    given('[with] order list', () {
       const orders = [
         Order(id: '1', coinAmount: 100, coinPrice: 100),
         Order(id: '2', coinAmount: 100, coinPrice: 100),
       ];
 
       late IOrdersRepository fakeOrderRepository;
-      setUp(() {
+      before(() {
         final repo = DummyOrdersRepository(orders);
         repo.onInit();
         fakeOrderRepository = repo;
@@ -60,8 +61,8 @@ void main() {
         controller.orders.should.be(orders);
       });
 
-      whenn('pagination', body: () {
-        setUp(() async {
+      whenn('pagination', () {
+        before(() async {
           // Act
           await controller.loadMoreOrders();
           await Future.delayed(const Duration(milliseconds: 1));
@@ -75,7 +76,7 @@ void main() {
       });
     });
 
-    whenn('creating new order', body: () {
+    whenn('creating new order', () {
       const amount = 1000.0;
       const price = 7.0;
       final date = DateTime.now();
@@ -91,7 +92,7 @@ void main() {
         );
       });
 
-      whenn('[with] succsess creating', body: () {
+      whenn('[with] succsess creating', () {
         // Arrange
         const newOrderId = '123';
         const newOrderDetailPageArgs = newOrderId; // {'id': newOrderId};
@@ -138,7 +139,7 @@ void main() {
         });
       });
 
-      whenn('[and] creation is failed', body: () {
+      whenn('[and] creation is failed', () {
         const errorMessage = 'could not create order';
         setUp(() async {
           // Arrange

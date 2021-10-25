@@ -2,9 +2,8 @@ import 'package:flutter_getx_testing/models/order.dart';
 import 'package:flutter_getx_testing/models/pnl_calculator.dart';
 import 'package:flutter_getx_testing/models/wallet.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:given_when_then_unit_test/given_when_then_unit_test.dart';
 import 'package:shouldly/shouldly.dart';
-
-import '../given_when_then.dart';
 
 void main() {
   test('PNL with empty wallet', () {
@@ -28,7 +27,7 @@ void main() {
     //
     // Assert
     const price = 31200.0;
-    const wallet = Wallet(orders: [
+    final wallet = Wallet(orders: [
       Order(
         coinAmount: 1.0,
         coinPrice: price,
@@ -57,7 +56,7 @@ void main() {
 
   group('Non empty wallet with Profit', () {
     // Assert
-    const wallet = Wallet(orders: [
+    final wallet = Wallet(orders: [
       Order(
         coinAmount: 1.0,
         coinPrice: 31200.0,
@@ -87,9 +86,9 @@ void main() {
     });
   });
 
-  given('Non empty wallet with Loss', body: () {
+  given('Non empty wallet with Loss', () {
     // Assert
-    const wallet = Wallet(orders: [
+    final wallet = Wallet(orders: [
       Order(
         coinAmount: 1.0,
         coinPrice: 62400.0,
@@ -97,7 +96,7 @@ void main() {
     ]);
     const currentPrice = 31200.0;
 
-    whenn('calculate', body: () {
+    whenn('calculate', () {
       // Act
       final pnl = PnlCalculator.calculate(
         wallet: wallet,

@@ -232,3 +232,19 @@ void then(
     skip: skip,
   );
 }
+
+void beforeAll(dynamic Function() body) {
+  setUpAll(body);
+}
+
+void before(dynamic Function() body) {
+  setUp(body);
+}
+
+void after(dynamic Function() body) {
+  tearDown(body);
+}
+
+void afterAll(dynamic Function() body) {
+  tearDownAll(body);
+}

@@ -1,10 +1,10 @@
-import 'package:flutter_getx_testing/models/order.dart';
 import 'package:flutter_getx_testing/pages/main/wallet/widgets/portfolio_summary_view_controller.dart';
 import 'package:flutter_getx_testing/services/orders_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:given_when_then_unit_test/given_when_then_unit_test.dart'
+    hide when;
 import 'package:mocktail/mocktail.dart';
 import 'package:shouldly/shouldly.dart';
-import '../given_when_then.dart';
 
 import '../mocks.dart';
 
@@ -47,11 +47,11 @@ void main() {
         emitsInOrder([0, 100, 200, 300, 400]));
   });
 
-  given('Controller with Wallet and Coin market Price', body: () {
+  given('Controller with Wallet and Coin market Price', () {
     //
     late PortfolioSummaryViewController controller;
 
-    setUp(() {
+    before(() {
       // Arrange
       final mockCoinMarketService = MockCoinMarketService();
       final mockRepo = MockOrderRepository();
@@ -59,9 +59,8 @@ void main() {
       when(() => mockCoinMarketService.currentCoinPrice$)
           .thenAnswer((_) => Stream.fromIterable([20]));
 
-      when(() => mockRepo.orders$).thenAnswer((_) => Stream.value([
-            Order(coinAmount: 1, coinPrice: 10),
-          ]));
+      when(() => mockRepo.stat$)
+          .thenAnswer((_) => Stream.value(OrdersStat(1, 10)));
 
       controller =
           PortfolioSummaryViewController(mockCoinMarketService, mockRepo);
@@ -73,7 +72,7 @@ void main() {
 
     then('holdings should be', () {
       // Assert
-      controller.holdings.should.be(20);
+      controller.holdings.should.be(1);
     });
 
     then('Pnl Value should be', () {

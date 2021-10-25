@@ -296,6 +296,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.3.8"
+  given_when_then_unit_test:
+    dependency: "direct dev"
+    description:
+      path: "../given_when_then_unit_test"
+      relative: true
+    source: path
+    version: "0.0.1"
   glob:
     dependency: transitive
     description:

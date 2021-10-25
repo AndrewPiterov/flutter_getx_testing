@@ -1,40 +1,35 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:given_when_then_unit_test/given_when_then_unit_test.dart';
 import 'package:shouldly/shouldly.dart';
-
-import 'given_when_then.dart';
 
 void main() {
   Calculator calc = Calculator();
-  given('Calucator',
-      after: () => calc.clear(),
-      body: () {
-        //
-        whenn('add 10',
-            before: () => calc.add(10),
-            body: () {
-              //
-              then('should be 10', () {
-                calc.res.should.be(10);
-              });
 
-              whenn('substract 5',
-                  before: () => calc.substract(5),
-                  body: () {
-                    then('should be 5', () {
-                      calc.res.should.be(5);
-                    });
-                  });
-            });
-
-        whenn('substruct 1',
-            before: () => calc.substract(1),
-            body: () {
-              //
-              then('should be -1', () {
-                calc.res.should.be(-1);
-              });
-            });
+  given('Calucator', () {
+    before(() => calc.clear());
+    //
+    when('add 10', () {
+      before(() => calc.add(10));
+      //
+      then('should be 10', () {
+        calc.res.should.be(10);
       });
+
+      when('substract 5', () {
+        before(() => calc.substract(5));
+        then('should be 5', () {
+          calc.res.should.be(5);
+        });
+      });
+    });
+
+    when('substruct 1', () {
+      before(() => calc.substract(1));
+      //
+      then('should be -1', () {
+        calc.res.should.be(-1);
+      });
+    });
+  });
 }
 
 class Calculator {

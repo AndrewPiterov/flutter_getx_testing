@@ -9,11 +9,10 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
-
   equatable: ^2.0.3
   fluent_result: ^4.0.1
+  flutter:
+    sdk: flutter
   speed_up: ^0.4.2
   speed_up_get: ^0.0.1
   get: ^4.3.8
@@ -37,6 +36,8 @@ dev_dependencies:
   flutter_lints: ^1.0.4
   shouldly: ^0.2.4
   mocktail: ^0.2.0
+  given_when_then_unit_test:
+    path: ../given_when_then_unit_test
 
 flutter:
   uses-material-design: true

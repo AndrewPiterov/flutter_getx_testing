@@ -56,6 +56,19 @@ class FirebaseOrdersRepository extends GetxService
       });
 
   @override
+  Stream<OrdersStat> get stat$ =>
+      _firestore.collection('stats').doc('1').snapshots().map((event) {
+        final data = event.data();
+        if (data == null) {
+          return OrdersStat(0, 0);
+        }
+        return OrdersStat(
+          double.parse(data['coinAmount']?.toString() ?? '0'),
+          double.parse(data['totalInvested']?.toString() ?? '0'),
+        );
+      });
+
+  @override
   void onInit() {
     super.onInit();
     unawaited(loadMoreOrders());
@@ -91,17 +104,4 @@ class FirebaseOrdersRepository extends GetxService
     // TODO: save in Firebase
     return ResultOf.success(order);
   }
-
-  @override
-  Stream<OrdersStat> get stat$ =>
-      _firestore.collection('stats').doc('1').snapshots().map((event) {
-        final data = event.data();
-        if (data == null) {
-          return OrdersStat(0, 0);
-        }
-        return OrdersStat(
-          double.parse(data['coinAmount']?.toString() ?? '0'),
-          double.parse(data['totalInvested']?.toString() ?? '0'),
-        );
-      });
 }
