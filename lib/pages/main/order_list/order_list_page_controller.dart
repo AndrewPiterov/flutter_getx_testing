@@ -1,8 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_testing/models/models.dart';
 import 'package:flutter_getx_testing/services/services.dart';
 import 'package:flutter_getx_testing/shared/routing.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 abstract class IOrderListPageController {
@@ -35,9 +35,15 @@ class OrderListPageController extends GetxController {
   final _orders = <Order>[].obs;
   List<Order> get orders => _orders;
 
+  late ScrollController scrollController;
+  final isBusyToFetcchNextPage = false.obs;
+  final noMoreOreders = false.obs;
+
   @override
   void onInit() {
     super.onInit();
+
+    scrollController = ScrollController()..addListener(_onScroll);
 
     // Getting orders
     _ordersRepository.orders$.listen((event) {
@@ -72,7 +78,8 @@ class OrderListPageController extends GetxController {
   }
 
   Future loadMoreOrders() async {
-    await _ordersRepository.loadMoreOrders();
+    final pageCount = await _ordersRepository.loadMoreOrders();
+    noMoreOreders.value = pageCount < 1;
   }
 
   Future goToOrderDetail(Order order) async {
@@ -82,5 +89,31 @@ class OrderListPageController extends GetxController {
       AppRoutes.orderDetail,
       arguments: {'id': order.id},
     );
+  }
+
+  Future _onScroll() async {
+    if (noMoreOreders.isTrue) {
+      debugPrint('there is no more orders');
+      return;
+    }
+    final offset = scrollController.position.pixels -
+        scrollController.position.maxScrollExtent;
+
+    // debugPrint('Scrolling: $offset');
+
+    if (offset > 50) {
+      if (isBusyToFetcchNextPage.isTrue) return;
+
+      debugPrint('Fetch next page...');
+
+      isBusyToFetcchNextPage.value = true;
+
+      await Future.delayed(const Duration(milliseconds: 700));
+      await loadMoreOrders();
+
+      debugPrint('Fetch next page: DONE');
+
+      isBusyToFetcchNextPage.value = false;
+    }
   }
 }

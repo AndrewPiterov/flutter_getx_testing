@@ -19,6 +19,9 @@ Future initServices() async {
   Get.put<IDateTimeAdapter>(UtcDateTimeAdapter());
   Get.put<IToastrService>(ToastrService());
   Get.put<INavigationService>(GetXNavigationService());
-  Get.put<IOrdersRepository>(FirebaseOrdersRepository());
+  final repo = Get.put<IOrdersRepository>(FirebaseOrdersRepository());
   Get.put<ICoinMarketService>(BinanceCoinMarketService());
+
+  // seed db
+  // await (repo as FirebaseOrdersRepository).seedDb();
 }

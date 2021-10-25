@@ -199,10 +199,11 @@ class DummyOrdersRepository extends GetxService implements IOrdersRepository {
   }
 
   @override
-  Future loadMoreOrders() async {
+  Future<int> loadMoreOrders() async {
     await Future.delayed(const Duration(milliseconds: 100));
     final newList = _orderSubject.value.toList()..addAll(second);
     _orderSubject.add(newList);
+    return second.length;
   }
 
   @override

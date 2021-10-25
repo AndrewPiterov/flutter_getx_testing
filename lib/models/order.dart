@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class Order extends Equatable {
@@ -13,6 +14,13 @@ class Order extends Equatable {
   final double coinPrice;
   double get totalPaid => coinAmount * coinPrice;
   final DateTime? date;
+
+  Map<String, dynamic> get asJson => {
+        'id': id,
+        'date': date == null ? null : Timestamp.fromDate(date!),
+        'amount': coinAmount,
+        'price': coinPrice,
+      };
 
   Order copyWith({String? id}) {
     return Order(
