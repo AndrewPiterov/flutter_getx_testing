@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'order_list/order_list_page.dart';
 import 'settings/settings_page.dart';
@@ -27,24 +28,24 @@ class _MainPageState extends State<MainPage> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: opentab,
         currentIndex: _currentIndex,
-        items: const [
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.wallet_giftcard),
-            label: 'Wallet',
+            label: 'wallet'.tr,
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.list,
               key: ValueKey('order_history_tab_button'),
             ),
-            label: 'Orders',
+            label: 'orders'.tr,
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.settings,
               key: ValueKey('settings_tab_button'),
             ),
-            label: 'Settings',
+            label: 'settings'.tr,
           ),
         ],
       ),

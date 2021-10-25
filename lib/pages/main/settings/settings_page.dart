@@ -12,7 +12,7 @@ class SettingsPage extends GetView<ISettingsPageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text('settings'.tr),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -28,7 +28,7 @@ class SettingsPage extends GetView<ISettingsPageController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    c.isDarkMode ? 'DARK' : 'Light',
+                    c.isDarkMode ? 'dark_mode'.tr : 'light_mode'.tr,
                     style: c.isDarkMode
                         ? const TextStyle(fontWeight: FontWeight.bold)
                         : null,
@@ -42,27 +42,27 @@ class SettingsPage extends GetView<ISettingsPageController> {
               ),
             ),
             20.h,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Language'),
-                if (c.language == 'en')
-                  TextButton(
-                    onPressed: () => c.changeLangugae('ru'),
-                    child: const Text('English'),
-                  ),
-                if (c.language == 'ru')
-                  TextButton(
-                    onPressed: () => c.changeLangugae('en'),
-                    child: const Text('Русский'),
-                  ),
-              ],
-            ),
+            Obx(() => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('language'.tr),
+                    if (c.language == 'en')
+                      TextButton(
+                        onPressed: () => c.changeLangugae('ru'),
+                        child: const Text('English'),
+                      ),
+                    if (c.language == 'ru')
+                      TextButton(
+                        onPressed: () => c.changeLangugae('en'),
+                        child: const Text('Русский'),
+                      ),
+                  ],
+                )),
             20.h,
             OutlinedButton(
               onPressed: c.signOut,
-              child: const Text(
-                'Sign Out',
+              child: Text(
+                'signout'.tr,
                 style: TextStyle(
                   color: Colors.redAccent,
                 ),

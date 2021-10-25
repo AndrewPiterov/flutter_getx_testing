@@ -13,7 +13,7 @@ class OrderListPage extends GetView<OrderListPageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Order History'),
+        title: Text('orders'.tr),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
