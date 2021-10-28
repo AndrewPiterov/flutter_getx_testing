@@ -16,7 +16,7 @@ class PnlData {
 }
 
 class PnlCalculator {
-  static PnlData calculate({
+  PnlData calculate({
     required IInvestmentData wallet,
     required double currentPrice,
   }) {

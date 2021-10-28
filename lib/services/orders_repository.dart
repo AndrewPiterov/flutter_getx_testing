@@ -8,8 +8,16 @@ import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:speed_up_get/speed_up_get.dart';
 
-class OrdersStat implements IInvestmentData {
-  OrdersStat(this.coinAmount, this.totalInvested);
+class InvestmentData implements IInvestmentData {
+  const InvestmentData({
+    required this.coinAmount,
+    required this.totalInvested,
+  });
+
+  static const empty = InvestmentData(
+    coinAmount: 0,
+    totalInvested: 0,
+  );
 
   @override
   final double coinAmount;
@@ -23,7 +31,7 @@ class OrdersStat implements IInvestmentData {
 abstract class IOrdersRepository {
   Stream<List<Order>> get orders$;
 
-  Stream<OrdersStat> get stat$;
+  Stream<InvestmentData> get stat$;
 
   Future<int> loadMoreOrders();
 
@@ -56,15 +64,15 @@ class FirebaseOrdersRepository extends GetxService
       });
 
   @override
-  Stream<OrdersStat> get stat$ =>
+  Stream<InvestmentData> get stat$ =>
       _firestore.collection('stats').doc('1').snapshots().map((event) {
         final data = event.data();
         if (data == null) {
-          return OrdersStat(0, 0);
+          return InvestmentData.empty;
         }
-        return OrdersStat(
-          double.parse(data['coinAmount']?.toString() ?? '0'),
-          double.parse(data['totalInvested']?.toString() ?? '0'),
+        return InvestmentData(
+          coinAmount: double.parse(data['coinAmount']?.toString() ?? '0'),
+          totalInvested: double.parse(data['totalInvested']?.toString() ?? '0'),
         );
       });
 
@@ -143,7 +151,10 @@ class FirebaseOrdersRepository extends GetxService
       Order(coinAmount: 1, coinPrice: 66974.77, date: DateTime(2021, 10, 20)),
     ];
     final wallet = Wallet(orders: orders);
-    final stat = OrdersStat(wallet.coinAmount, wallet.totalInvested);
+    final stat = InvestmentData(
+      coinAmount: wallet.coinAmount,
+      totalInvested: wallet.totalInvested,
+    );
 
     // clear
     final items = await _firestore.collection('orders').get();

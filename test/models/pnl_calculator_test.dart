@@ -12,7 +12,7 @@ void main() {
     const currentPrice = 100000.0;
 
     // Act
-    final pnl = PnlCalculator.calculate(
+    final pnl = PnlCalculator().calculate(
       wallet: wallet,
       currentPrice: currentPrice,
     );
@@ -36,7 +36,7 @@ void main() {
     const currentPrice = price;
 
     // Act
-    final pnl = PnlCalculator.calculate(
+    final pnl = PnlCalculator().calculate(
       wallet: wallet,
       currentPrice: currentPrice,
     );
@@ -65,7 +65,7 @@ void main() {
     const currentPrice = 62400.0;
 
     // Act
-    final pnl = PnlCalculator.calculate(
+    final pnl = PnlCalculator().calculate(
       wallet: wallet,
       currentPrice: currentPrice,
     );
@@ -98,7 +98,7 @@ void main() {
 
     whenn('calculate', () {
       // Act
-      final pnl = PnlCalculator.calculate(
+      final pnl = PnlCalculator().calculate(
         wallet: wallet,
         currentPrice: currentPrice,
       );

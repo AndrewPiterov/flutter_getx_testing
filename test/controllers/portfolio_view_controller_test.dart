@@ -18,11 +18,14 @@ void main() {
         .thenAnswer((_) => Stream.fromIterable([10, 20, 30, 40, 50]));
 
     when(() => mockRepo.stat$).thenAnswer((_) => Stream.value(
-          OrdersStat(0, 0),
+          InvestmentData.empty,
         ));
 
-    final controller =
-        PortfolioSummaryViewController(mockCoinMarketService, mockRepo);
+    final controller = PortfolioSummaryViewController(
+      mockCoinMarketService,
+      mockRepo,
+      MockThemeService(),
+    );
 
     expect(controller.pnlData$.map((event) => event.percent),
         emitsInOrder([0, 0, 0, 0, 0]));
@@ -37,11 +40,11 @@ void main() {
         .thenAnswer((_) => Stream.fromIterable([10, 20, 30, 40, 50]));
 
     when(() => mockRepo.stat$).thenAnswer((_) => Stream.value(
-          OrdersStat(1, 10),
+          InvestmentData(coinAmount: 1, totalInvested: 10),
         ));
 
-    final controller =
-        PortfolioSummaryViewController(mockCoinMarketService, mockRepo);
+    final controller = PortfolioSummaryViewController(
+        mockCoinMarketService, mockRepo, MockThemeService());
 
     expect(controller.pnlData$.map((event) => event.percent),
         emitsInOrder([0, 100, 200, 300, 400]));
@@ -59,11 +62,11 @@ void main() {
       when(() => mockCoinMarketService.currentCoinPrice$)
           .thenAnswer((_) => Stream.fromIterable([20]));
 
-      when(() => mockRepo.stat$)
-          .thenAnswer((_) => Stream.value(OrdersStat(1, 10)));
+      when(() => mockRepo.stat$).thenAnswer((_) =>
+          Stream.value(InvestmentData(coinAmount: 1, totalInvested: 10)));
 
-      controller =
-          PortfolioSummaryViewController(mockCoinMarketService, mockRepo);
+      controller = PortfolioSummaryViewController(
+          mockCoinMarketService, mockRepo, MockThemeService());
 
       // Act
       controller.onInit();

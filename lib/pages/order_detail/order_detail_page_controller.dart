@@ -1,9 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_getx_testing/models/order.dart';
+import 'package:flutter_getx_testing/services/services.dart';
 import 'package:get/get.dart';
 import 'package:speed_up_get/speed_up_get.dart';
 
 class OrderDetailPageController extends GetxController with GetxSubscribing {
+  OrderDetailPageController({IThemeService? themeService})
+      : _themeService = themeService ?? Get.find();
+
+  final IThemeService _themeService;
+
+  bool get isDarkMode => _themeService.isDarkMode;
+
   final _order = Rxn<Order>();
   Order? get order => _order.value;
 

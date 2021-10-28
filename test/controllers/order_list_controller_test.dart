@@ -214,5 +214,5 @@ class DummyOrdersRepository extends GetxService implements IOrdersRepository {
 
   @override
   // TODO: implement stat$
-  Stream<OrdersStat> get stat$ => throw UnimplementedError();
+  Stream<InvestmentData> get stat$ => throw UnimplementedError();
 }

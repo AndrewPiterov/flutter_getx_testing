@@ -4,7 +4,7 @@ import 'package:speed_up_flutter/speed_up_flutter.dart';
 import 'package:intl/intl.dart';
 
 class OrderListItemView extends StatelessWidget {
-  const OrderListItemView(
+  OrderListItemView(
     this.order, {
     required this.index,
     this.onTap,
@@ -15,9 +15,7 @@ class OrderListItemView extends StatelessWidget {
   final int index;
   final void Function()? onTap;
 
-  static const textStyle = TextStyle(
-    fontSize: 16,
-  );
+  var textStyle = TextStyle(fontSize: 16);
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +47,17 @@ class OrderListItemView extends StatelessWidget {
                     children: [
                       Text(
                         '> Buy',
-                        style: textStyle.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.headline6,
+                        // style: textStyle.copyWith(
+                        //   fontWeight: FontWeight.bold,
+                        // ),
                       ),
                       Text(
                         '#${order.id}',
-                        style: textStyle.copyWith(fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(fontSize: 12),
                       )
                     ],
                   ),
@@ -64,9 +66,9 @@ class OrderListItemView extends StatelessWidget {
                   child: Text(
                     '${order.coinAmount} BTC',
                     textAlign: TextAlign.right,
-                    style: textStyle.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
               ],
@@ -81,11 +83,14 @@ class OrderListItemView extends StatelessWidget {
                     children: [
                       Text(
                         'Date',
-                        style: textStyle.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
-                      Text(DateFormat('yyyy-MM-dd HH:mm').format(order.date!))
+                      Text(
+                        DateFormat('yyyy-MM-dd HH:mm').format(order.date!),
+                        style: Theme.of(context).textTheme.bodyText1!,
+                      )
                     ],
                   ),
                 ),
@@ -96,11 +101,14 @@ class OrderListItemView extends StatelessWidget {
                       Text(
                         'Paid:',
                         textAlign: TextAlign.right,
-                        style: textStyle.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
-                      Text('\$${order.totalPaid}')
+                      Text(
+                        '\$${order.totalPaid}',
+                        style: Theme.of(context).textTheme.bodyText1!,
+                      )
                     ],
                   ),
                 ),

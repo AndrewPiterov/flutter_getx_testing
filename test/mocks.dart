@@ -21,3 +21,7 @@ class MockNavigator extends GetxService
 class MockToastrService extends GetxService
     with Mock
     implements IToastrService {}
+
+class MockThemeService extends GetxService with Mock implements IThemeService {}
+
+class MyMocK {}

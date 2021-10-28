@@ -56,7 +56,9 @@ class PortfolioSummaryView extends GetView<IPortfolioSummaryViewController> {
                     value: '+ \$${c.pnlValue.toStringAsFixed(2)}',
                     additional: Text(
                       '+ ${c.pnl.toStringAsFixed(2)}%',
-                      style: const TextStyle(color: Colors.green),
+                      style: TextStyle(
+                          color:
+                              c.isDarkMode ? Colors.amberAccent : Colors.green),
                     ),
                   ),
                 ),

@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:flutter_getx_testing/models/order.dart';
 import 'package:flutter_getx_testing/models/pnl_calculator.dart';
 import 'package:flutter_getx_testing/models/wallet.dart';
 import 'package:flutter_getx_testing/services/coin_market_service.dart';
 import 'package:flutter_getx_testing/services/orders_repository.dart';
+import 'package:flutter_getx_testing/services/theme_service.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:speed_up_get/speed_up_get.dart';
@@ -17,6 +17,8 @@ abstract class IPortfolioSummaryViewController {
 
   Stream<PnlData> get pnlData$;
 
+  bool get isDarkMode;
+
   Future refreshData();
 }
 
@@ -26,10 +28,12 @@ class PortfolioSummaryViewController extends GetxController
   PortfolioSummaryViewController(
     this._coinMarketService,
     this._ordersRepository,
+    this._themeService,
   );
 
   final ICoinMarketService _coinMarketService;
   final IOrdersRepository _ordersRepository;
+  final IThemeService _themeService;
 
   @override
   void onInit() {
@@ -38,7 +42,7 @@ class PortfolioSummaryViewController extends GetxController
         CombineLatestStream.combine2<double, IInvestmentData, void>(
             _coinMarketService.currentCoinPrice$, _ordersRepository.stat$,
             (a, b) {
-          final pnl = PnlCalculator.calculate(wallet: b, currentPrice: a);
+          final pnl = PnlCalculator().calculate(wallet: b, currentPrice: a);
 
           _holdings.value = b.coinAmount;
           _pnlValue.value = pnl.value;
@@ -70,6 +74,9 @@ class PortfolioSummaryViewController extends GetxController
   double get pnlValue => _pnlValue.value;
 
   @override
+  bool get isDarkMode => _themeService.isDarkMode;
+
+  @override
   Future refreshData() async {
     // TODO: implement
   }
@@ -79,6 +86,6 @@ class PortfolioSummaryViewController extends GetxController
       CombineLatestStream.combine2<double, IInvestmentData, PnlData>(
           _coinMarketService.currentCoinPrice$,
           _ordersRepository.stat$,
-          (currentPrice, stats) => PnlCalculator.calculate(
-              wallet: stats, currentPrice: currentPrice));
+          (currentPrice, stats) => PnlCalculator()
+              .calculate(wallet: stats, currentPrice: currentPrice));
 }
