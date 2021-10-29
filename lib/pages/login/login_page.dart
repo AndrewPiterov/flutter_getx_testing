@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_testing/shared/routing.dart';
+import 'package:flutter_getx_testing/pages/pages.dart';
 import 'package:get/get.dart';
 import 'package:speed_up_flutter/speed_up_flutter.dart';
 

@@ -6,7 +6,7 @@ import 'package:speed_up_get/speed_up_get.dart';
 
 import 'portfolio_summary_view_controller.dart';
 
-class PortfolioSummaryView extends GetView<IPortfolioSummaryViewController> {
+class PortfolioSummaryView extends GetView<PortfolioSummaryViewController> {
   const PortfolioSummaryView({Key? key}) : super(key: key);
 
   @override
@@ -56,9 +56,7 @@ class PortfolioSummaryView extends GetView<IPortfolioSummaryViewController> {
                     value: '+ \$${c.pnlValue.toStringAsFixed(2)}',
                     additional: Text(
                       '+ ${c.pnl.toStringAsFixed(2)}%',
-                      style: TextStyle(
-                          color:
-                              c.isDarkMode ? Colors.amberAccent : Colors.green),
+                      style: TextStyle(color: Colors.green),
                     ),
                   ),
                 ),

@@ -72,13 +72,13 @@ class OrderDetailPage extends GetView<OrderDetailPageController> {
           style: Theme.of(context)
               .textTheme
               .headline6!
-              .copyWith(color: c.isDarkMode ? Colors.white : Colors.black),
+              .copyWith(color: Colors.black),
         ),
         Text(
           value,
           style: Theme.of(context).textTheme.headline6!.copyWith(
                 fontWeight: FontWeight.bold,
-                color: c.isDarkMode ? Colors.white : Colors.black,
+                color: Colors.black,
               ),
         ),
       ],

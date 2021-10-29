@@ -15,7 +15,7 @@ class OrderListItemView extends StatelessWidget {
   final int index;
   final void Function()? onTap;
 
-  var textStyle = TextStyle(fontSize: 16);
+  final textStyle = TextStyle(fontSize: 16);
 
   @override
   Widget build(BuildContext context) {

@@ -13,7 +13,7 @@ class OrderListPage extends GetView<OrderListPageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('orders'.tr),
+        title: Text('orders'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -22,29 +22,9 @@ class OrderListPage extends GetView<OrderListPageController> {
         child: Obx(
           () => ListView.separated(
             key: const ValueKey('order_list'),
-            controller: c.scrollController,
-            itemCount: c.orders.length + 1,
+            itemCount: c.orders.length,
             separatorBuilder: (_, __) => 10.h,
             itemBuilder: (_, index) {
-              if (index == c.orders.length) {
-                return Obx(() {
-                  return c.isBusyToFetcchNextPage.value
-                      ? const Padding(
-                          padding: EdgeInsets.fromLTRB(10, 10, 10, 30),
-                          child: Center(child: CircularProgressIndicator()),
-                        )
-                      : c.noMoreOreders.value
-                          ? Padding(
-                              padding: const EdgeInsets.only(bottom: 10.0),
-                              child: Text(
-                                'No more orders 🎉',
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          : SizedBox();
-                });
-              }
-
               final order = c.orders[index];
               return Padding(
                 padding: EdgeInsets.only(
@@ -53,7 +33,7 @@ class OrderListPage extends GetView<OrderListPageController> {
                 child: OrderListItemView(
                   order,
                   index: index,
-                  onTap: () => c.goToOrderDetail(order),
+                  onTap: () {},
                 ),
               );
             },
