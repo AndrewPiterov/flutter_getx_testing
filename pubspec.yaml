@@ -34,6 +34,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter  
   flutter_lints: ^1.0.4
+  shouldly: ^0.4.1+1
+  given_when_then_unit_test: ^0.0.10
   
 flutter:
   uses-material-design: true
